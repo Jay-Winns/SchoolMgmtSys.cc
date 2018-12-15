@@ -1,1 +1,0 @@
-# SchoolMgmtSys.cc

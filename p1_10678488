@@ -1,0 +1,349 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//SCHOOL MANAGEMENT PROGRAM
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <conio.h>
+#include <windows.h>
+
+using namespace std;
+
+struct student
+{
+ string fname;
+ string lname;
+ string ID;
+ string level;
+}studentData;
+
+struct staff
+{
+ string fst_name;
+ string lst_name;
+ string qualification;
+ string subj;
+}tech[20];
+
+struct courses
+{
+	string name;
+	string coursecode;
+}course[20];
+
+int  main()
+{
+
+int i=0,j;
+char choice;
+string find;
+string srch;
+
+while(1)
+{ 
+ system("cls");
+ 
+ cout<<"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\";
+ cout<<"\n\n\t\t\tSCHOOL MANAGEMENT PROGRAM\n\n";
+ cout<<"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\";
+ cout<<"\n\n\t\t\tMAIN SCREEN\n\n";
+ cout<<"Enter your choice: "<<endl;
+ cout<<"1.Students information"<<endl;
+ cout<<"2.Staff information"<<endl;
+ cout<<"3.Courses informtion"<<endl;
+ cout<<"4.Exit program"<<endl;
+ cin>>choice;
+
+system("cls");
+
+switch(choice)
+{
+ 
+case '1': 
+{ 
+while(1)
+{ 
+system("cls");
+
+cout<<"\t\t\tSTUDENTS INFORMATION AND BIO DATA SECTION\n\n\n";
+cout<<"Enter your choice: "<<endl;
+cout<<"1.Create new entry\n";
+cout<<"2.Find and display entry\n";
+cout<<"3.Jump to main\n";
+cin>>choice;
+
+switch (choice)
+
+{
+case '1':
+{  ofstream f1("student.txt",ios::app);
+
+for( i=0;choice!='N';i++)
+{
+
+if((choice=='y')||(choice=='Y')||(choice=='1'))
+{
+ cout<<"Enter First name: ";
+ cin>>studentData.fname;
+ cout<<"Enter Last name: ";
+ cin>>studentData.lname;
+ cout<<"Enter ID number: ";
+ cin>>studentData.ID;
+ cout<<"Enter level: ";
+ cin>>studentData.level;
+ 
+ f1<<studentData.fname<<endl<<studentData.lname<<endl<<studentData.ID<<endl<<studentData.level<<endl;
+ cout<<"Do you want to enter data: ";
+ cout<<"Press Y for Continue and N to Finish:  ";
+ cin>>choice;
+}
+} 
+f1.close();
+}
+continue;
+
+case '2':
+{  ifstream f2("student.txt"); 
+
+cout<<"Enter First name to be displayed: ";
+cin>>find;
+cout<<endl;
+int notFound = 0;
+for( j=0;(j<i)||(!f2.eof());j++)
+{ 
+
+getline(f2,studentData.fname);
+
+if(studentData.fname==find)
+{
+ notFound = 1;
+ cout<<"First Name: "<<studentData.fname<<endl;
+ cout<<"Last Name: "<<studentData.lname<<endl;
+
+ getline(f2,studentData.ID);
+ cout<<"ID  number: "<<studentData.ID<<endl;
+ getline(f2,studentData.level);
+ cout<<"level: "<<studentData.level<<endl<<endl;
+}
+}
+
+if(notFound == 0){
+
+cout<<"No Record Found"<<endl;
+}
+f2.close();
+cout<<"Press any key two times to proceed";
+getch();
+getch();
+
+}
+continue;
+
+case '3':
+{
+break;
+}
+}
+
+break;
+}
+continue;
+}
+
+case '2':
+{ 
+while(1)
+{ 
+system("cls");
+
+cout<<"\t\t\tTEACHERS INFORMATION AND BIODATA SECTION\n\n\n";
+cout<<"Enter your choice: "<<endl;
+cout<<"1.Create new entry\n";
+cout<<"2.Find and display\n";
+cout<<"3.Jump to main\n";
+cin>>choice;
+
+switch (choice)
+{
+case '1':
+{ 
+ofstream t1("teacher.txt",ios::app);
+
+for(i=0;choice!='n'&& choice!='N';i++)
+{
+ 
+ if((choice=='y')||(choice=='Y')||(choice=='1'))
+ {
+  cout<<"Enter First name: ";
+  cin>>tech[i].fst_name;
+  cout<<"Enter Last name:: ";
+  cin>>tech[i].lst_name;
+  cout<<"Enter qualification: ";
+  cin>>tech[i].qualification;
+  cout<<"Enter Subject that you are teaching ";
+  cin>>tech[i].subj;
+  
+  t1<<tech[i].fst_name<<endl<<tech[i].lst_name<<endl 
+   <<tech[i].qualification<<endl<<tech[i].subj<<endl;
+  cout<<"Do you want to enter more staffs ";
+  cin>>choice;
+ }
+} 
+system("cls");
+
+
+t1.close();
+}
+continue;
+
+case '2':
+{ 
+ifstream t2("teacher.txt"); 
+
+cout<<"Enter name to be displayed: ";
+cin>>find;
+
+cout<<endl;
+int notFound = 0;
+for( j=0;((j<i)||(!t2.eof()));j++)
+{ 
+ 
+ getline(t2,tech[j].fst_name);
+ 
+ if(tech[j].fst_name==find)
+ {
+  notFound = 1;
+  cout<<"First name: "<<tech[j].fst_name<<endl;
+  getline(t2,tech[j].lst_name);
+  cout<<"Last name: "<<tech[j].lst_name<<endl;
+  getline(t2,tech[j].qualification);
+  cout<<"Qualification: "<<tech[j].qualification<<endl;
+
+  getline(t2,tech[j].subj);
+  cout<<"Subject whos teach: "<<tech[j].subj<<endl;
+ }
+ 
+}
+t2.close();
+if(notFound == 0){
+
+ cout<<"No Record Found"<<endl;
+}
+cout<<"Press any key two times to proceed";
+getch();
+getch();
+}
+continue;
+
+case '3':
+{
+break;
+}
+}
+
+break;
+}
+continue;
+}
+
+case '3':
+{
+while(1)
+{ 
+system("cls");
+
+cout<<"\t\t\tCourses INFORMATION AND BIO DATA SECTION\n\n\n";
+cout<<"Enter your choice: "<<endl;
+cout<<"1.Create new entry\n";
+cout<<"2.Find and display entry\n";
+cout<<"3.Jump to main\n";
+cin>>choice;
+
+switch (choice)
+{
+case '1':
+{ 
+ofstream r1("course.txt",ios::app);
+
+for(i=0;choice!='n'&& choice!='N';i++)
+{
+ 
+ if((choice=='y')||(choice=='Y')||(choice=='1'))
+ {
+  cout<<"Enter Course name: ";
+  cin>>course[i].name;
+  cout<<"Enter Course code: ";
+  cin>>course[i].coursecode;
+  
+  r1<<course[i].name<<endl<<course[i].coursecode<<endl;
+  cout<<"Do you want to enter more courses ";
+  cin>>choice;
+ }
+}
+
+system("cls");
+
+r1.close();
+}
+
+continue;
+
+case '2':
+{ 
+ifstream r2("course.txt"); 
+
+cout<<"Enter name to be displayed: ";
+cin>>find;
+
+cout<<endl;
+int notFound = 0;
+for( j=0;((j<i)||(!r2.eof()));j++)
+{ 
+ 
+ getline(r2,course[j].name);
+ 
+ if(course[j].name==find)
+ {
+  notFound = 1;
+  cout<<"Course name: "<<course[j].name<<endl;
+  getline(r2,course[j].name);
+  cout<<"Course code: "<<course[j].coursecode<<endl;
+ }
+ 
+}
+r2.close();
+if(notFound == 0){
+
+ cout<<"No Record Found"<<endl;
+}
+cout<<"Press any key two times to proceed";
+getch();
+getch();
+}
+
+continue;
+
+case '3':
+{
+break;
+}
+}
+
+break;
+}
+
+continue;
+}
+
+case '4':
+{
+break;
+}
+}   
+break;
+}
+
+}
